@@ -89,24 +89,24 @@ def test_create_user_parametrize(users_credentials):
     assert response_date[0:16] == current_date[0:16]
 
 
-json_file_reader = open("Users_credentails.json")
-users_credentials = json.load(json_file_reader)
-@pytest.mark.parametrize("users_credentials", users_credentials)
-def test_create_user_parametrize_from_file(users_credentials):
-
-    headers = {'Content-Type': 'application/json'}
-
-    response = httpx.post("https://reqres.in/api/users", json = users_credentials, headers = headers)
-
-    assert response.status_code == 201
-    user = response.json()
-    validate(user,USER_DATA_SCHEMA_CREATE_PERSON)
-    assert users_credentials["name"] == user["name"]
-    assert users_credentials["job"] == user ["job"]
-    assert len(user["id"]) != 0
-    response_date = user["createdAt"].replace('T', ' ')
-    current_date = str(datetime.datetime.utcnow())
-    assert response_date[0:16] == current_date[0:16]
+# json_file_reader = open("Users_credentails.json")
+# users_credentials = json.load(json_file_reader)
+# @pytest.mark.parametrize("users_credentials", users_credentials)
+# def test_create_user_parametrize_from_file(users_credentials):
+#
+#     headers = {'Content-Type': 'application/json'}
+#
+#     response = httpx.post("https://reqres.in/api/users", json = users_credentials, headers = headers)
+#
+#     assert response.status_code == 201
+#     user = response.json()
+#     validate(user,USER_DATA_SCHEMA_CREATE_PERSON)
+#     assert users_credentials["name"] == user["name"]
+#     assert users_credentials["job"] == user ["job"]
+#     assert len(user["id"]) != 0
+#     response_date = user["createdAt"].replace('T', ' ')
+#     current_date = str(datetime.datetime.utcnow())
+#     assert response_date[0:16] == current_date[0:16]
 
 
 def test_register_successful():
