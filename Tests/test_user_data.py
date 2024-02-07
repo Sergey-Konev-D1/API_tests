@@ -68,7 +68,7 @@ def test_get_single_resourse_note_found():
     assert len(response_size) == 0
 
 def test_get_delayed_response():
-    response = httpx.get("https://reqres.in/api/users?delay=3", timeout=3)
+    response = httpx.get("https://reqres.in/api/users?delay=3", timeout=10)
     assert response.status_code == 200
     for user in response.json()["data"]:
         validate(user,USER_DATA_SCHEMA)
